@@ -16,10 +16,9 @@ packages that have the most files associated with them.
 An example output could be:
 
 
-`./package_statistics.py amd64`
+```bash 
+./package_statistics.py amd64
 
-
-```
 1. <package name 1> <number of files>
 2. <package name 2> <number of files>
 ......
@@ -53,5 +52,5 @@ optional arguments:
   -i, --include-udeb    Flag to include stats of udeb packages of the procided architecture
   -a, --all             Finds package stats for all distributions
   -n NUMBER, --number NUMBER
-                        Input to displat top 'n' packages
+                        Input to display the top 'n' packages
 ```
