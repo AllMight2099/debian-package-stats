@@ -1,7 +1,8 @@
 import argparse
 import requests
 from bs4 import BeautifulSoup
-import json
+import json 
+from json.decoder import JSONDecodeError
 import os
 import gzip
 
@@ -54,11 +55,11 @@ def main() -> None:
     all_flag = args.all
     n = args.number
     
+    # file_path = read_json_lock(arch, udeb_flag)
+
     file_path = fetch_content_files(arch, mirror, udeb_flag)
 
     print_stats(file_path, udeb_flag, n)
-
-    # open('test', '+w').write(str(data))
 
     if not os.path.isdir('/var/tmp/pkg_stats'):
         os.makedirs('/var/tmp/pkg_stats')
@@ -77,14 +78,15 @@ def fetch_content_files(
 
     content_links = []
 
+    file_link = ''
     for _ in body:
         temp = _.split()
-        if temp[0]=='<a' and 'Contents-'+arch in temp[1]:
+        if temp[0]=='<a' and f'Contents-{arch}.gz' in temp[1]:
             file_link=mirror+'Contents-'+arch+'.gz'
             if udeb:
                 file_link=mirror+'Contents-udeb-'+arch+'.gz'
 
-    if not file_link:
+    if file_link=='':
         raise Exception("Architecture not found")
     
     if udeb:
@@ -94,8 +96,9 @@ def fetch_content_files(
         output_zip_path = f'/var/tmp/pkg_stats/Content-{arch}.gz'
         output_file_path = f'/var/tmp/pkg_stats/Content-{arch}'
     
-    data = requests.get(file_link)
-        
+    print("Fetching data from "+file_link)
+    print()
+    data = requests.get(file_link)    
     open(output_zip_path, 'wb').write(data.content)
     with gzip.open(output_zip_path, 'rb') as temp:
         data = temp.read()
@@ -105,15 +108,26 @@ def fetch_content_files(
     return output_file_path
 
 
-def read_write_json_lock() -> bool:
+def read_json_lock(
+    arch: str,
+    udeb: bool, 
+) -> str:
+    lock_file = {}
     if os.path.isfile('/var/tmp/pkg_stats/content_lock.json'):
         lock_file = open('/var/tmp/pkg_stats/content_lock.json').read()
     else:
-        open('/var/tmp/pkg_stats/content_lock.json', 'w+').close()
-        lock_file = open('/var/tmp/pkg_stats/content_lock.json').read()
-    lock_file = json.loads(lock_file)
-    print(lock_file)
-    return 
+        open('/var/tmp/pkg_stats/content_lock.json', 'w').close()
+        lock_file = open('/var/tmp/pkg_stats/content_lock.json', 'r').read()
+    try:
+        lock_file = json.loads(lock_file)
+    except JSONDecodeError:
+        pass
+    
+    if arch in lock_file.keys():
+        return True
+    else:
+        return False
+
 
 def print_stats(
     file_path: str, 
