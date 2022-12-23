@@ -1,0 +1,27 @@
+argcomplete==1.12.3
+attrs==22.2.0
+certifi==2022.5.18.1
+charset-normalizer==2.0.12
+click==7.1.2
+colorama==0.4.4
+colorlog==6.6.0
+distlib==0.3.4
+filelock==3.7.1
+idna==3.3
+iniconfig==1.1.1
+nox==2022.1.7
+packaging==21.3
+platformdirs==2.5.2
+pluggy==0.13.1
+py==1.11.0
+pyparsing==3.0.9
+pytest==6.2.4
+python-frontmatter==1.0.0
+PyYAML==6.0
+requests==2.27.1
+shellingham==1.4.0
+six @ file:///AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-110/six-1.15.0-py2.py3-none-any.whl
+toml==0.10.2
+typer==0.3.2
+urllib3==1.26.9
+virtualenv==20.14.1
