@@ -38,4 +38,20 @@ that can help you verify your code is compliant.
 2. After that, run `python setup.py develop` to install `pkg-stats` locally
 
 ## Usage
+```bash
+usage: pkg-stats [-h] [-m MIRROR] [-i] [-a] [-n NUMBER] arch
 
+Displays stats for debian packages of a particular architecture
+
+positional arguments:
+  arch                  Input system architecture. Eg: arm, amd64, etc
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MIRROR, --mirror MIRROR
+                        Mirror link to fetch package information from. Defaults to debian's mirror
+  -i, --include-udeb    Flag to include stats of udeb packages of the procided architecture
+  -a, --all             Finds package stats for all distributions
+  -n NUMBER, --number NUMBER
+                        Input to displat top 'n' packages
+```
