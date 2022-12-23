@@ -1,8 +1,4 @@
-import typer
-from pkg_stats import cli, __app_name__
-
-def main():
-    cli.app(prog_name=__app_name__)
+from .cli import main
 
 if __name__ == "__main__":
     main()
