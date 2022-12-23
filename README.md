@@ -35,7 +35,7 @@ that can help you verify your code is compliant.
 
 1. To install the pkg locally, first create a virtual environment and install dependencies using pip
 
-2. After that, run `python setup.py develop` to install `pkg-stats` locally
+2. Run `python setup.py develop` to install `pkg-stats` locally
 
 ## Usage
 ```
