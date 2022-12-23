@@ -38,7 +38,7 @@ that can help you verify your code is compliant.
 
 ## Usage
 ```
-usage: pkg-stats [-h] [-m MIRROR] [-i] [-a] [-n NUMBER] arch
+pkg-stats [-h] [-m MIRROR] [-i] [-a] [-n NUMBER] arch
 
 Displays stats for debian packages of a particular architecture
 

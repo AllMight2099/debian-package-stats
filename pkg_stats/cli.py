@@ -43,7 +43,7 @@ def main() -> None:
     parser.add_argument(
         '-n', 
         '--number',
-        help="Input to displat top 'n' packages",
+        help="Input to display the top 'n' packages",
         default=10,
         type=int
     )
@@ -55,14 +55,14 @@ def main() -> None:
     all_flag = args.all
     n = args.number
     
+    if not os.path.isdir('/var/tmp/pkg_stats'):
+        os.makedirs('/var/tmp/pkg_stats')
     # file_path = read_json_lock(arch, udeb_flag)
 
     file_path = fetch_content_files(arch, mirror, udeb_flag)
 
     print_stats(file_path, udeb_flag, n)
 
-    if not os.path.isdir('/var/tmp/pkg_stats'):
-        os.makedirs('/var/tmp/pkg_stats')
 
 
 def fetch_content_files(
